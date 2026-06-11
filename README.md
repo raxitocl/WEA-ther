@@ -1,4 +1,5 @@
 # WEA-ther
+<img width="1271" height="546" alt="WEA_Ther_main_cut" src="https://github.com/user-attachments/assets/81b362d9-4f9b-4616-b934-f69388226201" />
 
 WEA-ther es una aplicación web interactiva inspirada en los sistemas meteorológicos retro (como The Weather Channel, IntelliStar y WeatherScan). Ofrece pronósticos del clima en tiempo real, alertas automáticas, oleaje y mareas, calidad del aire, mapas de radar continental y local, locución por voz por medio de síntesis de texto a voz (TTS) y un reproductor de radio/música en segundo plano.
 
