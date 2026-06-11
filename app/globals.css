@@ -1,49 +1,1178 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Share+Tech+Mono&family=VT323&display=swap');
+
+@font-face {
+  font-family: 'Star3000';
+  src: url('/fonts/Star3000.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Star4000';
+  src: url('/fonts/Star4000.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'StarJR';
+  src: url('/fonts/StarJR.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --bg-retro: radial-gradient(circle, #0e1b65 0%, #03082a 100%);
+  --panel-bg: rgba(6, 12, 70, 0.85);
+  --panel-border: 2px solid #00f0ff;
+  --panel-glow: 0 0 15px rgba(0, 240, 255, 0.35);
+  
+  --text-primary: #ffffff;
+  --text-yellow: #ffff00;
+  --text-cyan: #00ffff;
+  --text-orange: #ff9100;
+  --text-red: #ff3333;
+  --text-green: #39ff14;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+  --font-display: 'Outfit', sans-serif;
+  --font-retro: 'Star4000', 'VT323', monospace;
+  --font-digital: 'Star4000', 'Share Tech Mono', monospace;
 
-html {
-  height: 100%;
-}
-
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
-
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /* Reset default settings */
+  --background: #03082a;
+  --foreground: #ffffff;
 }
 
 * {
   box-sizing: border-box;
+  margin: 0;
   padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  font-family: var(--font-display);
+  background: #03082a;
+  color: var(--text-primary);
+  overflow-x: hidden;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* CRT Screen Effect - only applied to client display container */
+.crt-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: var(--bg-retro);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background var(--theme-transition-duration, 3s) ease-in-out;
+}
+
+.crt-container::after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.22) 50%), 
+              linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+  background-size: 100% 4px, 6px 100%;
+  z-index: 99;
+  pointer-events: none;
+}
+
+.crt-flicker {
+  animation: crt-flicker-anim 0.2s infinite;
+}
+
+@keyframes crt-flicker-anim {
+  0% { opacity: 0.992; }
+  50% { opacity: 1; }
+  100% { opacity: 0.992; }
+}
+
+/* Retro Scanline Sweep Line */
+.scanline-sweep::before {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 5px;
+  background: rgba(0, 240, 255, 0.06);
+  opacity: 0.6;
+  z-index: 98;
+  pointer-events: none;
+  animation: scanline-sweep-anim 8s linear infinite;
+}
+
+@keyframes scanline-sweep-anim {
+  0% { top: -10px; }
+  100% { top: 105%; }
+}
+
+/* Glassmorphic Panels */
+.retro-panel {
+  background: var(--panel-bg);
+  border: var(--panel-border);
+  box-shadow: var(--panel-glow);
+  border-radius: 8px;
+  padding: 1.5rem;
+  backdrop-filter: blur(10px);
+  transition: background var(--theme-transition-duration, 3s) ease-in-out,
+              border-color var(--theme-transition-duration, 3s) ease-in-out,
+              box-shadow var(--theme-transition-duration, 3s) ease-in-out;
+}
+
+.title-glow-cyan {
+  color: var(--text-cyan);
+  text-shadow: 0 0 8px var(--text-cyan);
+  transition: color var(--theme-transition-duration, 3s) ease-in-out,
+              text-shadow var(--theme-transition-duration, 3s) ease-in-out;
+}
+
+.title-glow-yellow {
+  color: var(--text-yellow);
+  text-shadow: 0 0 8px rgba(255, 255, 0, 0.6);
+}
+
+/* Slide Transition Animations */
+.slide-active {
+  animation: slide-in 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Marquee Scrolling Ticker */
+.marquee-bar {
+  background: #900; /* Deep red ticker background */
+  border-top: 3px solid #f00;
+  border-bottom: 3px solid #f00;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  z-index: 50;
+  box-shadow: 0 -5px 15px rgba(255, 0, 0, 0.2);
+}
+
+.marquee-time-box {
+  background: #000;
+  color: var(--text-yellow);
+  font-family: 'Star3000', monospace;
+  font-size: 1.3rem;
+  padding: 0 1.2rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-right: 3px solid #f00;
+  white-space: nowrap;
+}
+
+.marquee-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: 'Star3000', monospace;
+  font-size: 1.95rem;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+  animation: marquee-anim 35s linear infinite;
+  padding-left: 20px;
+}
+
+@keyframes marquee-anim {
+  0% {
+    transform: translate3d(100vw, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+.sub-marquee-bar {
+  background: #000;
+  border-bottom: 3px solid #f00;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  z-index: 49;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.sub-marquee-label-box {
+  background: #111;
+  color: var(--text-cyan);
+  font-family: 'Star3000', monospace;
+  font-size: 0.95rem;
+  font-weight: bold;
+  padding: 0 0.8rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  border-right: 3px solid #f00;
+  white-space: nowrap;
+  letter-spacing: 1px;
+  flex-shrink: 0;
+}
+
+.sub-marquee-container {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.sub-marquee-content {
+  display: inline-block;
+  white-space: nowrap;
+  font-family: 'Star3000', monospace;
+  font-size: 1.45rem;
+  letter-spacing: 1px;
+  color: var(--text-primary);
+  animation: sub-marquee-anim 25s linear infinite;
+  padding-left: 20px;
+}
+
+@keyframes sub-marquee-anim {
+  0% {
+    transform: translate3d(100vw, 0, 0);
+  }
+  100% {
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+
+/* Local Forecast Text Screen - WeatherStar Jr Font */
+.starjr-slide, .starjr-slide * {
+  font-family: 'StarJR', monospace !important;
+}
+
+/* Admin Dashboard Styles */
+.admin-container {
+  max-width: 1800px;
+  width: 95%;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  color: #e2e8f0;
+  transition: max-width 0.3s ease;
+}
+
+.admin-container.fluid {
+  max-width: 1800px;
+  width: 95%;
+}
+
+.admin-header {
+  border-bottom: 2px solid #4a5568;
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 900px) {
+  .admin-grid {
+    grid-template-columns: 2fr 1fr;
+  }
+}
+
+/* Grid layout columns for simple and advanced views */
+.admin-grid-simple {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.admin-grid-advanced {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 768px) {
+  .admin-grid-simple {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .admin-grid-advanced {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .admin-grid-simple {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .admin-grid-advanced {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1280px) {
+  .admin-grid-advanced {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1600px) {
+  .admin-grid-advanced {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Segmented Control / Toggle Switch */
+.mode-toggle-container {
+  display: inline-flex;
+  background: #1a202c;
+  border: 1px solid #2d3748;
+  padding: 0.25rem;
+  border-radius: 8px;
+}
+
+.mode-toggle-btn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  color: #cbd5e0;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.mode-toggle-btn:hover {
+  color: #fff;
+}
+
+.mode-toggle-btn.active {
+  background: #3182ce;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+
+.admin-card {
+  background: #1a202c;
+  border: 1px solid #2d3748;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  color: #cbd5e0;
+}
+
+.form-input {
+  width: 100%;
+  background: #2d3748;
+  border: 1px solid #4a5568;
+  color: #fff;
+  border-radius: 4px;
+  padding: 0.6rem 0.8rem;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  border-color: #3182ce;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 0.6rem 1.2rem;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: #3182ce;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #2b6cb0;
+}
+
+.btn-danger {
+  background: #e53e3e;
+  color: #fff;
+}
+
+.btn-danger:hover {
+  background: #c53030;
+}
+
+.btn-success {
+  background: #38a169;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background: #2f855a;
+}
+
+/* Flashing Weather Alert Slide Styles */
+.title-glow-red {
+  color: var(--text-red);
+  text-shadow: 0 0 10px rgba(255, 51, 51, 0.8), 0 0 20px rgba(255, 51, 51, 0.4);
+}
+
+.alert-panel {
+  border-color: #ff3333 !important;
+  box-shadow: 0 0 25px rgba(255, 51, 51, 0.6) !important;
+  background: linear-gradient(135deg, rgba(80, 0, 0, 0.9) 0%, rgba(10, 0, 0, 0.95) 100%) !important;
+  animation: alert-panel-glow 4s infinite ease-in-out;
+}
+
+@keyframes alert-panel-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
+    border-color: #ff3333;
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 51, 51, 0.8), 0 0 10px rgba(255, 255, 0, 0.3);
+    border-color: #ffff00;
+  }
+}
+
+.alert-flash-icon {
+  animation: flash-icon-anim 1s infinite steps(2);
+  display: inline-block;
+}
+
+@keyframes flash-icon-anim {
+  0% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.3; transform: scale(1.05); }
+}
+
+@keyframes pulse-alert {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 15px rgba(255, 51, 51, 0.3);
+  }
+  50% {
+    transform: scale(1.01);
+    box-shadow: 0 0 25px rgba(255, 51, 51, 0.6);
+  }
+}
+
+/* Weather Icon Sizing Utilities */
+.w-16 {
+  width: 4rem !important;
+}
+.h-16 {
+  height: 4rem !important;
+}
+.w-32 {
+  width: 8rem !important;
+}
+.h-32 {
+  height: 8rem !important;
+}
+
+/* Auto-scroll animation for compact city list */
+@keyframes scrollCitiesVertical {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+/* Sizing utilities for Vanilla CSS compatibility of Tailwind-like layout classes */
+.w-8 { width: 32px !important; }
+.h-8 { height: 32px !important; }
+.w-12 { width: 48px !important; }
+.h-12 { height: 48px !important; }
+.w-16 { width: 64px !important; }
+.h-16 { height: 64px !important; }
+.w-20 { width: 80px !important; }
+.h-20 { height: 80px !important; }
+.w-24 { width: 96px !important; }
+.h-24 { height: 96px !important; }
+.w-32 { width: 128px !important; }
+.h-32 { height: 128px !important; }
+
+/* Ensure all text inside the retro panels default to the retro weather font */
+.retro-panel, .retro-panel * {
+  font-family: var(--font-retro), 'Share Tech Mono', monospace;
+}
+
+.cities-scroll-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.cities-scroll-container::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+.cities-scroll-content {
+  display: flex;
+  flex-direction: column;
+  animation: scrollCitiesVertical var(--scroll-duration, 20s) linear infinite;
+}
+
+.cities-scroll-content:hover {
+  animation-play-state: paused;
+}
+
+/* Sidebar media panel styles */
+.sidebar-media-panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  background: rgba(2, 4, 30, 0.6);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  width: 100%;
+  height: 100%;
+}
+
+/* Ken Burns zoom effect */
+@keyframes kenBurnsEffect {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.15);
+  }
+}
+
+.slideshow-zoom-image {
+  animation: kenBurnsEffect var(--transition-duration, 5s) ease-in-out infinite alternate;
+}
+
+/* --- Station ID (Identificacion de Emisora) Styles --- */
+.station-id-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, #000088 0%, #000033 100%);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--font-retro), 'Share Tech Mono', monospace;
+  color: #ffffff;
+  overflow: hidden;
+  text-align: center;
+  padding: 2rem;
+}
+
+.station-id-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 650px;
+  width: 100%;
+}
+
+.station-id-title {
+  font-size: 2.8rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #00f0ff;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.6), 0 0 20px rgba(0, 240, 255, 0.3);
   margin: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+.station-id-provider {
+  font-size: 1.2rem;
+  color: #e2e8f0;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  border-bottom: 2px solid rgba(0, 240, 255, 0.4);
+  padding-bottom: 0.5rem;
+  width: 80%;
+  margin: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+.station-id-graphics {
+  margin: 1.5rem 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 140px;
+  position: relative;
+}
+
+.station-id-buffering-box {
+  width: 100%;
+  max-width: 400px;
+  margin-top: 1rem;
+}
+
+.station-id-buffering-label {
+  font-size: 1rem;
+  color: #a0aec0;
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+  animation: pulse-buffering 1.5s infinite alternate;
+}
+
+.station-id-progress-bg {
+  width: 100%;
+  height: 16px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #00f0ff;
+  border-radius: 2px;
+  padding: 2px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.8);
+}
+
+.station-id-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #3182ce 0%, #00f0ff 100%);
+  box-shadow: 0 0 8px rgba(0, 240, 255, 0.8);
+  transition: width 0.1s linear;
+}
+
+/* Built-in Graphics: Satellite, Radar, Globe */
+.retro-satellite-graphic {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.retro-satellite-svg {
+  animation: float-satellite 6s ease-in-out infinite alternate;
+}
+
+.retro-radar-scanner {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #00f0ff;
+  position: relative;
+  background: radial-gradient(circle, rgba(0, 240, 255, 0.15) 0%, rgba(0, 0, 0, 0.5) 100%);
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.retro-radar-scanner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(0, 240, 255, 0.5) 0deg, rgba(0, 240, 255, 0) 180deg);
+  border-radius: 50%;
+  animation: radar-sweep-anim 2.5s linear infinite;
+  transform-origin: center;
+}
+
+.retro-radar-grid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: 
+    radial-gradient(circle, transparent 20%, rgba(0, 240, 255, 0.1) 20%, rgba(0, 240, 255, 0.1) 21%, transparent 21%, transparent 40%, rgba(0, 240, 255, 0.1) 40%, rgba(0, 240, 255, 0.1) 41%, transparent 41%, transparent 60%, rgba(0, 240, 255, 0.1) 60%, rgba(0, 240, 255, 0.1) 61%, transparent 61%, transparent 80%, rgba(0, 240, 255, 0.1) 80%, rgba(0, 240, 255, 0.1) 81%, transparent 81%),
+    linear-gradient(to right, transparent 49.5%, rgba(0, 240, 255, 0.15) 49.5%, rgba(0, 240, 255, 0.15) 50.5%, transparent 50.5%),
+    linear-gradient(to bottom, transparent 49.5%, rgba(0, 240, 255, 0.15) 49.5%, rgba(0, 240, 255, 0.15) 50.5%, transparent 50.5%);
+}
+
+.retro-globe-container {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid #00f0ff;
+  overflow: hidden;
+  background: #000050;
+  box-shadow: 0 0 15px rgba(0, 240, 255, 0.3), inset 0 0 20px rgba(0,0,0,0.8);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.retro-globe-map {
+  position: absolute;
+  width: 250%;
+  height: 100%;
+  background-image: repeating-linear-gradient(90deg, transparent, transparent 15px, rgba(0, 240, 255, 0.4) 15px, rgba(0, 240, 255, 0.4) 30px);
+  mask-image: radial-gradient(circle, #fff 100%, transparent 100%);
+  animation: spin-globe-grid 4s linear infinite;
+  opacity: 0.75;
+}
+
+.retro-globe-latitudes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(to bottom, transparent 19.5%, rgba(0, 240, 255, 0.3) 19.5%, rgba(0, 240, 255, 0.3) 20.5%, transparent 20.5%,
+                              transparent 39.5%, rgba(0, 240, 255, 0.3) 39.5%, rgba(0, 240, 255, 0.3) 40.5%, transparent 40.5%,
+                              transparent 59.5%, rgba(0, 240, 255, 0.3) 59.5%, rgba(0, 240, 255, 0.3) 60.5%, transparent 60.5%,
+                              transparent 79.5%, rgba(0, 240, 255, 0.3) 79.5%, rgba(0, 240, 255, 0.3) 80.5%, transparent 80.5%);
+  pointer-events: none;
+}
+
+/* CRT Flash overlay and animation */
+.crt-flash-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0;
+  background: #000;
+}
+
+.crt-flash-active {
+  animation: crt-flash-anim 0.8s ease-out forwards;
+}
+
+/* Keyframes */
+@keyframes float-satellite {
+  0% {
+    transform: translateY(-8px) rotate(-5deg);
+  }
+  100% {
+    transform: translateY(8px) rotate(5deg);
   }
 }
+
+@keyframes radar-sweep-anim {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-globe-grid {
+  0% {
+    background-position: 0px 0;
+  }
+  100% {
+    background-position: 75px 0;
+  }
+}
+
+@keyframes pulse-buffering {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes crt-flash-anim {
+  0% {
+    background: #ffffff;
+    opacity: 1;
+    transform: scaleY(1) scaleX(1);
+  }
+  15% {
+    background: repeating-linear-gradient(0deg, #ccc, #ccc 2px, #333 2px, #333 4px);
+    opacity: 0.95;
+    transform: scaleY(1) scaleX(1);
+  }
+  35% {
+    background: #ffffff;
+    opacity: 1;
+    transform: scaleY(1) scaleX(1);
+  }
+  50% {
+    background: #111111;
+    transform: scaleY(0.015) scaleX(1);
+    opacity: 1;
+  }
+  70% {
+    background: #ffffff;
+    transform: scaleY(0.003) scaleX(0.4);
+    opacity: 1;
+  }
+  85% {
+    background: #000000;
+    transform: scaleY(0.003) scaleX(0.01);
+    opacity: 1;
+  }
+  100% {
+    background: #000000;
+    transform: scaleY(0) scaleX(0);
+    opacity: 0;
+  }
+}
+
+/* --- Admin Panel Sidebar Layout Styles --- */
+.admin-layout {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.admin-sidebar {
+  width: 250px;
+  background: #1a202c;
+  border: 1px solid #2d3748;
+  border-radius: 8px;
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  align-self: flex-start;
+}
+
+.admin-sidebar-btn {
+  width: 100%;
+  text-align: left;
+  background: transparent;
+  border: none;
+  color: #a0aec0;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.admin-sidebar-btn:hover {
+  background: #2d3748;
+  color: #fff;
+}
+
+.admin-sidebar-btn.active {
+  background: rgba(0, 240, 255, 0.08);
+  color: #00f0ff;
+  border-left-color: #00f0ff;
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+}
+
+.admin-main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  min-height: 500px;
+}
+
+/* --- WeatherSTAR 4000 (2005) Station ID Slide --- */
+.ws4000-id-slide-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, #ff7e00 0%, #d83b01 4%, #7d00aa 8%, #1a0dab 12%, #0000a5 15%, #0000a5 85%, #1a0dab 88%, #7d00aa 92%, #d83b01 96%, #ff7e00 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.25rem 2.2rem;
+  box-sizing: border-box;
+  font-family: var(--font-retro), 'Share Tech Mono', monospace;
+  color: #ffffff;
+}
+
+.ws4000-id-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 55px;
+  position: relative;
+  margin-bottom: 0.5rem;
+}
+
+.ws4000-logo-twc {
+  background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
+  border: 2px solid #ffffff;
+  border-radius: 6px;
+  padding: 4px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  width: 90px;
+  height: 48px;
+  box-sizing: border-box;
+}
+
+.ws4000-logo-twc-text1 {
+  font-size: 0.55rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.ws4000-logo-twc-text2 {
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.5px;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.ws4000-id-title-text {
+  font-size: 2.1rem;
+  font-weight: bold;
+  color: #ecc94b;
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.7);
+  letter-spacing: 1px;
+  flex: 1;
+  text-align: center;
+}
+
+.ws4000-id-star4000-label {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #cbd5e0;
+  text-align: right;
+  line-height: 1.1;
+  border-bottom: 2px solid #cbd5e0;
+  padding-bottom: 2px;
+}
+
+.ws4000-id-inner-box {
+  flex: 1;
+  background: rgba(0, 0, 100, 0.85);
+  border: 4px double #ffffff;
+  border-radius: 4px;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.8), 0 4px 10px rgba(0,0,0,0.5);
+  padding: 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.ws4000-id-line-location {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px #000;
+}
+
+.ws4000-id-line-weatherid {
+  font-size: 1.6rem;
+  color: #cbd5e0;
+  margin-top: 0.25rem;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px #000;
+}
+
+.ws4000-id-operator-container {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+  height: 80px;
+}
+
+.ws4000-id-operator-logo {
+  max-height: 70px;
+  max-width: 250px;
+  object-fit: contain;
+}
+
+.ws4000-id-line-channel {
+  font-size: 1.6rem;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px #000;
+}
+
+.ws4000-id-line-extra {
+  font-size: 1.25rem;
+  color: #90cdf4;
+  letter-spacing: 0.5px;
+  margin-top: 0.5rem;
+  text-shadow: 1.5px 1.5px 0px #000;
+}
+
+.ws4000-id-footer-datetime {
+  width: 100%;
+  font-size: 1.5rem;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0px #000;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  padding-top: 1rem;
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+  .admin-sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0.5rem;
+    align-self: stretch;
+  }
+  .admin-sidebar-btn {
+    width: auto;
+    flex: 1 1 150px;
+    justify-content: center;
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    padding: 0.6rem 1rem;
+  }
+  .admin-sidebar-btn.active {
+    border-left-color: transparent;
+    border-bottom-color: #00f0ff;
+  }
+}
+
+.ws4000-id-custom-text {
+  font-family: var(--font-retro), 'Share Tech Mono', monospace;
+  font-size: 1.4rem;
+  line-height: 1.6;
+  color: #ffffff;
+  text-shadow: 2px 2px 0px #000000;
+  white-space: pre-wrap;
+  margin-top: 1.5rem;
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+}
+
+.ws4000-id-sys-debug {
+  font-family: var(--font-retro), 'Share Tech Mono', monospace;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: #a0aec0;
+  text-shadow: 1.5px 1.5px 0px #000000;
+  border: 2px solid rgba(0, 240, 255, 0.25);
+  background: rgba(2, 4, 30, 0.4);
+  padding: 0.8rem 1.2rem;
+  border-radius: 4px;
+  width: 100%;
+  margin-top: 1.5rem;
+  box-sizing: border-box;
+}
+
+.ws4000-id-sys-debug-title {
+  color: #ecc94b;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-bottom: 0.4rem;
+  font-size: 1.2rem;
+}
+
+.ws4000-id-copyright-box {
+  border: 3px solid #ff7e00;
+  background: rgba(255, 126, 0, 0.08);
+  padding: 1.5rem;
+  border-radius: 4px;
+  font-family: var(--font-retro), 'Share Tech Mono', monospace;
+  text-shadow: 2px 2px 0px #000000;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255, 126, 0, 0.15);
+  box-sizing: border-box;
+}
+
+.ws4000-id-copyright-title {
+  color: #ff7e00;
+  font-weight: bold;
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px dashed rgba(255, 126, 0, 0.4);
+  padding-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.ws4000-id-copyright-content {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+/* Custom class overrides to disable post-processing/neon/glow effects */
+.no-scanlines::after {
+  display: none !important;
+}
+
+.no-text-glow * {
+  text-shadow: none !important;
+}
+
+.no-panel-glow .retro-panel,
+.no-panel-glow .alert-panel,
+.no-panel-glow .retro-radar-scanner,
+.no-panel-glow .retro-globe-container,
+.no-panel-glow .station-id-progress-bar {
+  box-shadow: none !important;
+}
+

@@ -1,14 +1,17 @@
 {
-  "name": "temp-app",
+  "name": "wea-ther",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "dashboard": "node scripts/dashboard.js",
+    "supervisor": "node scripts/dashboard.js"
   },
   "dependencies": {
+    "hls.js": "^1.6.16",
     "next": "16.2.6",
     "react": "19.2.4",
     "react-dom": "19.2.4"
