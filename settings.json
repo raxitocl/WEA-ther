@@ -1,0 +1,261 @@
+{
+  "mainCity": {
+    "name": "Iquique",
+    "latitude": -20.21326,
+    "longitude": -70.15027,
+    "country": "Chile",
+    "tidePath": "cl/tarapaca/iquique"
+  },
+  "waveProvider": "tablademareas",
+  "unitSystem": "metric",
+  "cityList": [
+    {
+      "name": "Santiago de Chile",
+      "latitude": -33.45694,
+      "longitude": -70.64827,
+      "country": "Chile"
+    },
+    {
+      "name": "Lima",
+      "latitude": -12.04318,
+      "longitude": -77.02824,
+      "country": "Perú"
+    },
+    {
+      "name": "Buenos Aires",
+      "latitude": -34.61315,
+      "longitude": -58.37723,
+      "country": "Argentina"
+    },
+    {
+      "name": "La Paz",
+      "latitude": -16.5,
+      "longitude": -68.15,
+      "country": "Bolivia"
+    },
+    {
+      "name": "Caracas",
+      "latitude": 10.48801,
+      "longitude": -66.87919,
+      "country": "Venezuela"
+    },
+    {
+      "name": "Bogotá",
+      "latitude": 4.60971,
+      "longitude": -74.08175,
+      "country": "Colombia"
+    },
+    {
+      "name": "Panamá",
+      "latitude": 8.9936,
+      "longitude": -79.51973,
+      "country": "Panamá"
+    },
+    {
+      "name": "Managua",
+      "latitude": 12.13282,
+      "longitude": -86.2504,
+      "country": "Nicaragua"
+    },
+    {
+      "name": "Ciudad de México",
+      "latitude": 19.42847,
+      "longitude": -99.12766,
+      "country": "México"
+    }
+  ],
+  "slides": {
+    "current": true,
+    "almanac": true,
+    "forecast": true,
+    "radar": true,
+    "localForecastText": true,
+    "continentalRadar": true,
+    "marineUv": true,
+    "airQuality": true,
+    "broadcastId": true
+  },
+  "disableWeatherForFun": false,
+  "continentalSelected": "south_america",
+  "slideDuration": 20,
+  "marqueeText": "Bienvenido a WEA-ther | Este es un mensaje de prueba.",
+  "musicUrls": [
+    "https://archive.org/download/weatherscancompletecollection/01%20Fair%20Weather.mp3",
+    "https://archive.org/download/weatherscancompletecollection/01%20Lazy%20Days.mp3",
+    "https://archive.org/download/weatherscancompletecollection/02%20Beach%20Frolic.mp3",
+    "https://archive.org/download/weatherscancompletecollection/02%20Good%20Ole%20Days.mp3",
+    "https://archive.org/download/weatherscancompletecollection/03%20Jumpin_.mp3",
+    "https://archive.org/download/weatherscancompletecollection/05%20Midnight%20Cruise.mp3",
+    "https://archive.org/download/weatherscancompletecollection/07%20Smooth%20Sailing.mp3"
+  ],
+  "activeMusicUrl": "https://archive.org/download/weatherscancompletecollection/01%20Fair%20Weather.mp3",
+  "musicVolume": 0.5,
+  "musicEnabled": true,
+  "showMusicInTicker": true,
+  "musicTickerType": "dynamic",
+  "enableAutoAlerts": true,
+  "customAlert": "",
+  "kioskMode": false,
+  "musicSourceType": "radio",
+  "activeRadioUrl": "http://ice1.somafm.com/illinois-128-mp3",
+  "activeLocalMusicUrl": "",
+  "onlineRadios": [
+    {
+      "name": "SomaFM: Illinois Street Lounge (Retro Exotica)",
+      "url": "http://ice1.somafm.com/illinois-128-mp3"
+    },
+    {
+      "name": "SomaFM: Groove Salad (Chill Ambient)",
+      "url": "http://ice1.somafm.com/groovesalad-128-mp3"
+    },
+    {
+      "name": "BioBio La Radio",
+      "url": "https://unlimited5-us.dps.live/biobiosantiago/aac/icecast.audio"
+    },
+    {
+      "name": "Rock & Pop",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/ROCK_AND_POPAAC.aac"
+    },
+    {
+      "name": "Radio Corazón",
+      "url": "https://playerservices.streamtheworld.com/api/livestream-redirect/CORAZONAAC.aac"
+    }
+  ],
+  "voiceoverEnabled": true,
+  "voiceoverVolume": 0.8,
+  "stationIdEnabled": true,
+  "stationIdName": "WEA-ther",
+  "stationIdProvider": "Servicio Meteorológico Transmitido en Vivo",
+  "stationIdVoiceoverText": "Este pronostico de clima en tiempo real es entregado por este proveedor...",
+  "stationIdMinDuration": 7,
+  "stationIdGraphic": "satellite",
+  "stationIdCustomGraphicUrl": "",
+  "activeRadarType": "precipitation",
+  "slideOrder": [
+    "current",
+    "localForecastText",
+    "forecast",
+    "almanac",
+    "marineUv",
+    "airQuality",
+    "radar",
+    "continentalRadar",
+    "broadcastId"
+  ],
+  "radarColorScheme": "satellite",
+  "themeMode": "auto",
+  "themeTransitionDuration": 2,
+  "enableWeatherBackgrounds": true,
+  "customBackgrounds": {},
+  "sidebarMediaMode": "none",
+  "tvStreamType": "iframe",
+  "tvStreamUrl": "https://www.youtube.com/live/KjeHVLUT908?si=a6pPTWZnri8F0vtk",
+  "clockFormat": "24h",
+  "clockShowDate": true,
+  "continentalSpeed": 0.7,
+  "continentalLoop": false,
+  "continentalZoom": 5,
+  "newsSourceType": "mixed",
+  "subMarqueeSpeed": 1,
+  "socialNetworks": [
+    {
+      "name": "Twitter/X",
+      "handle": "@change_me"
+    },
+    {
+      "name": "Instagram",
+      "handle": "@change_me"
+    },
+    {
+      "name": "TikTok",
+      "handle": "@change_me"
+    }
+  ],
+  "localNewsList": [],
+  "broadcastIdLocationOverride": "",
+  "broadcastIdWeatherId": "ChangeME",
+  "broadcastIdChannel": "Changeme",
+  "broadcastIdLogoUrl": "",
+  "broadcastIdExtraText": "change_me",
+  "broadcastIdTimezone": "",
+  "broadcastIdCustomText": "BIENVENIDOS A LA TRANSMISIÓN EN VIVO\nDESDE {ciudad}, {pais}.\nTEMPERATURA ACTUAL: {clima_actual}\nCONDICIÓN: {condicion}\nHUMEDAD: {humedad} | VIENTO: {viento_direccion} A {viento_velocidad}\nPRESIÓN: {presion}",
+  "broadcastIdCopyrightText": "ICONOS CLIMA © The Weather Channel.\nRSS NOTICIAS © Google Noticias, SoyIquique.\nCLIMA EN TIEMPO REAL © open-meteo.\nTTS © Microsoft Corporation.\nPRONOSTICO OLEAJE Y MAR © Tablademareas, open-meteo.\nRADARES © Esri Satellite Imagery, Mapbox, OpenStreetMap.\nTV Y RADIO © Television Nacional de Chile, PRISA Radio, Iberoamericana Radio Chile.\nCODIGO Y DESARROLLO © (IA) Google Inc/Alphabet.\nIDEA, LOGOTIPO, GRAFICOS EXTRAS © raxito.cl.",
+  "includeCountryNews": true,
+  "rssFeeds": [
+    {
+      "id": "google-news",
+      "name": "Google News (Búsqueda Automática)",
+      "url": "https://news.google.com/rss/search?q=Noticias+{ciudad}+{pais}&hl=es-419&gl=CL&ceid=CL:es-419",
+      "enabled": true,
+      "isBuiltIn": true
+    },
+    {
+      "id": "soychile",
+      "name": "SoyChile (Portal Regional)",
+      "url": "https://www.soychile.cl/{ciudad}/",
+      "enabled": true,
+      "isBuiltIn": true,
+      "isScraper": true
+    }
+  ],
+  "effectsSettings": {
+    "crtScanlinesEnabled": false,
+    "crtFlickerEnabled": false,
+    "scanlineSweepEnabled": false
+  },
+  "textSizeSettings": {
+    "current": {
+      "title": 1,
+      "temp": 1.15
+    },
+    "localForecastText": {
+      "title": 1.2,
+      "forecast": 1.05,
+      "extended": 1
+    },
+    "forecast": {
+      "dayLabel": 1.8,
+      "description": 1.4,
+      "tempMax": 1.3,
+      "tempMin": 1.05,
+      "precipitation": 1.3
+    },
+    "radar": {
+      "cardinals": 0.95,
+      "title": 1.05
+    },
+    "almanac": {
+      "details": 1.15,
+      "title": 1.05
+    },
+    "marineUv": {
+      "details": 1.1,
+      "title": 1.05
+    },
+    "airQuality": {
+      "details": 1.15,
+      "title": 1.05
+    },
+    "continentalRadar": {
+      "capital": 1.1,
+      "temperature": 1.1,
+      "title": 1,
+      "precipitation": 1.1
+    }
+  },
+  "security": {
+    "enabled": false,
+    "passwordHash": "",
+    "salt": "",
+    "twoFactorEnabled": false,
+    "twoFactorSecret": ""
+  },
+  "geminiAuth": {
+    "method": "oauth",
+    "apiKey": "",
+    "clientId": "",
+    "clientSecret": "",
+    "refreshToken": ""
+  },
+  "marqueeSpeed": 0.9
+}
